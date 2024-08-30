@@ -19,11 +19,11 @@ function SideNav() {
           </li>
           <li>
             <a
-              href="/dashboard"
+              href="cart"
               className="flex items-center p-1 text-gray-800 rounded-lg hover:bg-gray-700 hover:text-white"
             >
               <i className="fas fa-chart-line mr-2"></i>
-              All Customers
+              Selected Items
             </a>
           </li>
           <li>
