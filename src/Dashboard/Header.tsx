@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -23,9 +23,9 @@ function Header() {
       <div className="flex gap-3 items-center use">
         <h1>Hey Admin</h1>
         <i className="fas fa-user text-gray-800 text-xl"></i>
-        <a href="">
+        <Link to="cart">
           <i className="fas fa-globe text-gray-800 text-xl"></i>
-        </a>
+        </Link>
         <i className="fas fa-bell text-gray-800  text-xl"></i>
       </div>
     </div>

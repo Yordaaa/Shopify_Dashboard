@@ -1,7 +1,6 @@
-import { apiSlice2 } from './apiSlice2'; // Ensure this is correctly set up with base URL
-import { RegistrationInputProps, RegistrationResponseProps } from './types';
+import { apiSlice2 } from './apiSlice2';
+import { RegistrationInputProps, RegistrationResponseProps, CartItem } from './types';
 
-// Define the authApiSlice
 export const authApiSlice = apiSlice2.injectEndpoints({
   endpoints: (builder) => ({
     registration: builder.mutation<RegistrationResponseProps, RegistrationInputProps>({
@@ -10,13 +9,16 @@ export const authApiSlice = apiSlice2.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      // If using credentials, ensure this is correctly set up:
-      // options: {
-      //   credentials: 'include'
-      // }
+    }),
+
+    sendToShopify: builder.mutation<RegistrationResponseProps, { name: string; products: CartItem[] }>({
+      query: (data) => ({
+        url: '/shopify/products',
+        method: 'POST',
+        body: data,
+      }),
     }),
   }),
 });
 
-// Export the hook for usage in components
-export const { useRegistrationMutation } = authApiSlice;
+export const { useRegistrationMutation, useSendToShopifyMutation } = authApiSlice;
