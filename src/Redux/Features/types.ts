@@ -36,7 +36,6 @@ export interface productResTyp {
   weight: number;
   weight_unit_id: string;
   _id: string;
-  quantity?: number;
 }
 
 export interface ProductCardProps {
@@ -51,13 +50,13 @@ export interface productIdProps {
 
 export interface CartItem extends productResTyp {
   quantity: number;
+  price: number;
 }
 export interface RegistrationInputProps {
   apiKey: string;
   apiSecretKey: string;
   shopUrl: string;
   accessToken: string;
-  shopName: string;
 }
 
 export interface RegistrationResponseProps {

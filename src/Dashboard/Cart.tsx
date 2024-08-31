@@ -35,9 +35,9 @@ export default function Cart() {
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const products = cartItems.map((item) => ({
-      code: item.code,
-      price: prices[item._id] || 0,
-      quantity: quantities[item._id] || 1,
+      ...item,
+      price: prices[item._id],
+      quantity: quantities[item._id],
     }));
 
     console.log("Sending data to Shopify:", {
@@ -48,7 +48,7 @@ export default function Cart() {
     try {
       const response = await sendToShopify({
         shopUrl: shopName,
-        products: cartItems,
+        products,
       }).unwrap();
 
       if (response.success) {
