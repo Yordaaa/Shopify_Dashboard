@@ -9,22 +9,22 @@ function SideNav() {
       <nav className="mt-">
         <ul className="space-y-2">
           <li>
-            <a
-              href="/"
+            <Link
+              to="/"
               className="flex items-center p-1 text-gray-800 rounded-lg hover:bg-gray-700 hover:text-white"
             >
               <i className="fas fa-chart-line mr-2"></i>
               Dashboard
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="cart"
+            <Link
+              to="cart"
               className="flex items-center p-1 text-gray-800 rounded-lg hover:bg-gray-700 hover:text-white"
             >
               <i className="fas fa-chart-line mr-2"></i>
               Selected Items
-            </a>
+            </Link>
           </li>
           <li>
             <Link

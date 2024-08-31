@@ -1,11 +1,12 @@
 import { useDispatch } from "react-redux";
 import { useGetAllProductsQuery } from "../Redux/Features/productApiSlice";
 import { addToCart } from "../Redux/Features/cartSlice";
+import { productResTyp } from "../Redux/Features/types";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
 
-  const handleOnClick = (product) => {
+  const handleOnClick = (product: productResTyp) => {
     dispatch(addToCart(product));
   };
 
