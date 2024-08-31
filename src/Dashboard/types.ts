@@ -9,6 +9,7 @@ export interface cartProduct {
     code: string;
     quantity: number;
 }
+
 export interface quotationDataProps {
     name: string;
     email: string;
@@ -27,6 +28,7 @@ export interface quatationType {
     grandTotal: number;
     products: Product[];
 }
+
 export interface quatationResType {
     success: boolean;
     message: string;

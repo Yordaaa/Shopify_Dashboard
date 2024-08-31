@@ -30,6 +30,12 @@ function Home() {
       if (res.success) {
         toast.success(res.message);
         setSubscribeStatus(true);
+        toast.success(res.message);
+        setApiKey("");
+        setApiSecretKey("");
+        setShopUrl("");
+        setAccessToken("");
+        setShopName("");
         navigate("/product");
       }
     } catch (error: any) {
