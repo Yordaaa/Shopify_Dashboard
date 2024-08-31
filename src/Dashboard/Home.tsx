@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AnimatedSubscribeButton } from "../../@/components/magicui/animated-subscribe-button";
 import { useRegistrationMutation } from "../Redux/Features/authApiSlice";
+import { toast } from "react-toastify";
 
 function Home() {
   const [apiKey, setApiKey] = useState("");
@@ -17,14 +18,6 @@ function Home() {
 
   const connectHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Sending data to the server:", {
-      apiKey,
-      apiSecretKey,
-      shopUrl,
-      accessToken,
-      shopName,
-    });
-
     try {
       const res = await registration({
         apiKey,
@@ -34,10 +27,8 @@ function Home() {
         shopName,
       }).unwrap();
 
-      console.log("Server response:", res);
-
       if (res.success) {
-        console.log("Success:", res.message);
+        toast.success(res.message);
         setSubscribeStatus(true);
         navigate("/product");
       }

@@ -7,7 +7,10 @@ import {
 
 export const authApiSlice = apiSlice2.injectEndpoints({
   endpoints: (builder) => ({
-    registration: builder.mutation<string, RegistrationInputProps>({
+    registration: builder.mutation<
+      RegistrationResponseProps,
+      RegistrationInputProps
+    >({
       query: (data) => ({
         url: "/shopify/create-account",
         method: "POST",

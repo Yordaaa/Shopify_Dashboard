@@ -4,6 +4,7 @@ import { removeFromCart, clearCart } from "../Redux/Features/cartSlice";
 import { cartSelector } from "../Redux/Features/selector";
 import { FormEvent, useState } from "react";
 import { useSendToShopifyMutation } from "../Redux/Features/authApiSlice";
+import { toast } from "react-toastify";
 
 export default function Cart() {
   const cartItems = useSelector(cartSelector);
@@ -18,11 +19,6 @@ export default function Cart() {
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    console.log("Sending data to Shopify:", {
-      name: shopName,
-      cartItems,
-    });
-
     try {
       const response = await sendToShopify({
         shopUrl: shopName,
@@ -30,11 +26,11 @@ export default function Cart() {
       }).unwrap();
 
       if (response.success) {
-        console.log("Data sent to Shopify successfully!");
+        toast.success(response.message);
         setShopName("");
         dispatch(clearCart());
       } else {
-        console.log("Failed to send data to Shopify:", response.message);
+        toast.success("Failed to send data to Shopify");
       }
     } catch (error) {
       console.error("An unexpected error occurred:", error);
