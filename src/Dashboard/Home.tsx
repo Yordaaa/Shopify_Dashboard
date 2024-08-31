@@ -8,7 +8,6 @@ function Home() {
   const [apiSecretKey, setApiSecretKey] = useState("");
   const [shopUrl, setShopUrl] = useState("");
   const [accessToken, setAccessToken] = useState("");
-  const [shopName, setShopName] = useState("");
 
   const [registration, { isLoading }] = useRegistrationMutation();
   const navigate = useNavigate();
@@ -21,7 +20,6 @@ function Home() {
         apiSecretKey,
         shopUrl,
         accessToken,
-        shopName,
       }).unwrap();
 
       if (res.success) {
@@ -30,7 +28,6 @@ function Home() {
         setApiSecretKey("");
         setShopUrl("");
         setAccessToken("");
-        setShopName("");
         navigate("/product");
       }
     } catch (error: any) {
@@ -42,6 +39,16 @@ function Home() {
     <div className="w-full use">
       <div className="max-w-screen-sm mx-auto pt-5 px-7 border p-5 mt-10 rounded-md">
         <form onSubmit={connectHandler}>
+          <div className="mb-4">
+            <input
+              className="border rounded w-full py-2 px-3 text-gray-00 "
+              id="shopUrl"
+              type="text"
+              placeholder="Enter shopUrl"
+              value={shopUrl}
+              onChange={(e) => setShopUrl(e.target.value)}
+            />
+          </div>
           <div className="mb-4">
             <input
               className="border rounded w-full py-2 px-3 text-gray-00 "
@@ -65,31 +72,11 @@ function Home() {
           <div className="mb-4">
             <input
               className="border rounded w-full py-2 px-3 text-gray-00 "
-              id="shopUrl"
-              type="text"
-              placeholder="Enter shopUrl"
-              value={shopUrl}
-              onChange={(e) => setShopUrl(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <input
-              className="border rounded w-full py-2 px-3 text-gray-00 "
               id="accessToken"
               type="text"
               placeholder="Enter accessToken"
               value={accessToken}
               onChange={(e) => setAccessToken(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <input
-              className="border rounded w-full py-2 px-3 text-gray-00 "
-              id="shopName"
-              type="text"
-              placeholder="Enter shopName"
-              value={shopName}
-              onChange={(e) => setShopName(e.target.value)}
             />
           </div>
           <div className="flex justify-end">
