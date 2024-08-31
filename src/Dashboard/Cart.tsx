@@ -9,16 +9,34 @@ export default function Cart() {
   const cartItems = useSelector(cartSelector);
   const dispatch = useDispatch();
   const [shopName, setShopName] = useState("");
+  const [prices, setPrices] = useState<{ [key: string]: number }>({});
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
   const [sendToShopify, { isLoading }] = useSendToShopifyMutation();
 
   const handleRemoveItem = (id: string) => {
     dispatch(removeFromCart({ _id: id }));
   };
 
+  const handlePriceChange = (id: string, price: string) => {
+    setPrices((prevPrices) => ({
+      ...prevPrices,
+      [id]: parseFloat(price),
+    }));
+  };
+
+  const handleQuantityChange = (id: string, quantity: string) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: parseInt(quantity),
+    }));
+  };
+
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const products = cartItems.map((item) => ({
       code: item.code,
+      price: prices[item._id] || 0,
+      quantity: quantities[item._id] || 1, 
     }));
 
     console.log("Sending data to Shopify:", {
@@ -35,6 +53,8 @@ export default function Cart() {
       if (response.success) {
         console.log("Data sent to Shopify successfully!");
         setShopName("");
+        setPrices({});
+        setQuantities({});
         dispatch(clearCart());
       } else {
         console.log("Failed to send data to Shopify:", response.message);
@@ -46,7 +66,7 @@ export default function Cart() {
 
   return cartItems.length > 0 ? (
     <div className="max-w-screen-md pt-20 mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Shopping Cart</h1>
+      <h1 className="text-2xl font-bold mb-4">Selected products</h1>
       <ul role="list" className="divide-y">
         {cartItems.map((item) => (
           <li key={item._id} className="flex py-6">
@@ -67,9 +87,30 @@ export default function Cart() {
                 <h3>
                   <Link to="#">{item.description}</Link>
                 </h3>
-                <p className="mt-1 text-sm text-gray-500">{item.weight}</p>
-              </div>
-              <div className="flex flex-1 items-end justify-between text-sm">
+                <div className="flex gap-5">
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      placeholder="Enter price"
+                      value={prices[item._id] || ""}
+                      onChange={(e) =>
+                        handlePriceChange(item._id, e.target.value)
+                      }
+                      className="border rounded w-full py-2 px-3 text-gray-700"
+                    />
+                  </div>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      placeholder="Enter quantity"
+                      value={quantities[item._id] || ""}
+                      onChange={(e) =>
+                        handleQuantityChange(item._id, e.target.value)
+                      }
+                      className="border rounded w-full py-2 px-3 text-gray-700"
+                    />
+                  </div>
+                  <div className="flex flex-1 items-end justify-between text-sm">
                 <button
                   type="button"
                   onClick={() => handleRemoveItem(item._id)}
@@ -78,6 +119,9 @@ export default function Cart() {
                   Remove
                 </button>
               </div>
+                </div>
+              </div>
+              
             </div>
           </li>
         ))}
