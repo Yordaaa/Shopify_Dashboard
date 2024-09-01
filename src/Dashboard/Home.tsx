@@ -96,9 +96,9 @@ function Home() {
             <button
               type="submit"
               disabled={isLoading}
-              className="mt-5 w-full text-white bg-blue-950 hover:opacity-90 font-medium rounded-lg px-5 py-2.5 text-center"
+              className="mt-5 w-full text-white bg-gray-800 hover:opacity-90 font-medium rounded-lg px-5 py-2.5 text-center"
             >
-              {isLoading ? "Connecting..." : "Connected"}
+              {isLoading ? "Connecting..." : "Connect"}
             </button>
           </div>
         </form>
