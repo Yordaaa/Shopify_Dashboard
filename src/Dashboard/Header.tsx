@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <div className="shadow-sm pb-1 flex justify-between px-5">
+    <div className="shadow-sm pb-1 flex justify-end px-5">
       <div className="flex gap-3 items-center use">
         <h1>Hey Admin</h1>
         <i className="fas fa-user text-gray-800 text-xl"></i>
