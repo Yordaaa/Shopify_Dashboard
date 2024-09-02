@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { ErrorResponse, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRegistrationMutation } from "../Redux/Features/authApiSlice";
 import { toast } from "react-toastify";
+import { successMessage } from "./types";
 
 function Home() {
   const [apiKey, setApiKey] = useState("");
@@ -20,18 +21,24 @@ function Home() {
         apiSecretKey,
         shopUrl,
         accessToken,
-      }).unwrap();
+      });
 
-      if (res.success) {
-        toast.success(res.message);
-        setApiKey("");
-        setApiSecretKey("");
-        setShopUrl("");
-        setAccessToken("");
-        navigate("/product");
+      if ("data" in res) {
+        const { data } = res as { data: successMessage };
+        if (data.success) {
+          toast.success(data.message);
+          setApiKey("");
+          setApiSecretKey("");
+          setShopUrl("");
+          setAccessToken("");
+          navigate("/product");
+        }
+      } else {
+        const { error } = res as { error: ErrorResponse };
+        toast.error(error.data.message);
       }
-    } catch (error: any) {
-      console.log("Error:", error?.data?.message || "An error occurred");
+    } catch (error) {
+      toast.error("An expected error occurred");
     }
   };
 

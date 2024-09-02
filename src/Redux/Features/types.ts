@@ -53,18 +53,15 @@ export interface CartItem extends productResTyp {
   price: number;
 }
 export interface RegistrationInputProps {
-
   apiKey: string;
   apiSecretKey: string;
   shopUrl: string;
   accessToken: string;
 }
 export interface WooCommerceRegistrationInputProps {
-
   url: string;
   consumerKey: string;
   consumerSecret: string;
-  shopName: string;
 }
 
 export interface RegistrationResponseProps {
