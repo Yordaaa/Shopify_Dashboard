@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { ErrorResponse, Link } from "react-router-dom";
 import { removeFromCart, clearCart } from "../Redux/Features/cartSlice";
 import { cartSelector } from "../Redux/Features/selector";
 import { FormEvent, useState } from "react";
 import { useSendToWoocommerceMutation } from "../Redux/Features/authApiSlice";
 import { toast } from "react-toastify";
+import { successMessage } from "./types";
 
 export default function WooCart() {
   const cartItems = useSelector(cartSelector);
@@ -46,22 +47,26 @@ export default function WooCart() {
     });
 
     try {
-      const response = await sendToWoocommerce({
-        shopUrl: shopName,
+      const res = await sendToWoocommerce({
+        shopName,
         products,
-      }).unwrap();
+      });
 
-      if (response.success) {
-        toast.success(response.message);
-        setShopName("");
-        setPrices({});
-        setQuantities({});
-        dispatch(clearCart());
+      if ("data" in res) {
+        const { data } = res as { data: successMessage };
+        if (data.success) {
+          toast.success(data.message);
+          setShopName("");
+          setPrices({});
+          setQuantities({});
+          dispatch(clearCart());
+        }
       } else {
-        toast.success("Failed to send data to Shopify");
+        const { error } = res as { error: ErrorResponse };
+        toast.error(error.data.message);
       }
     } catch (error) {
-      console.error("An unexpected error occurred:", error);
+      toast.error("An unexpected error occurred");
     }
   };
 
