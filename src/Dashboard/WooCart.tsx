@@ -20,16 +20,18 @@ export default function WooCart() {
   };
 
   const handlePriceChange = (id: string, price: string) => {
+    const parsedPrice = parseFloat(price);
     setPrices((prevPrices) => ({
       ...prevPrices,
-      [id]: parseFloat(price),
+      [id]: parsedPrice >= 0 ? parsedPrice : 0,
     }));
   };
 
   const handleQuantityChange = (id: string, quantity: string) => {
+    const parsedQuantity = parseInt(quantity);
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [id]: parseInt(quantity),
+      [id]: parsedQuantity >= 0 ? parsedQuantity : 0,
     }));
   };
 

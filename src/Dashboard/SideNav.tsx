@@ -19,11 +19,11 @@ function SideNav() {
           </li>
           <li>
             <Link
-              to="cart"
+              to="sendproduct"
               className="flex items-center p-1 text-gray-800 rounded-lg hover:bg-gray-700 hover:text-white"
             >
               <i className="fas fa-chart-line mr-2"></i>
-              Selected Items
+              Send Product
             </Link>
           </li>
           <li>
