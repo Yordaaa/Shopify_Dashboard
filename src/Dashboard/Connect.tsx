@@ -1,20 +1,19 @@
-import { useState } from "react";
-import Home from "./Home";
+import { SetStateAction, useState } from "react";
+import Shopify from "./Shopify";
 import WooCommerce from "./WooCommerce";
 
 function Connect() {
   const [activeTab, setActiveTab] = useState("shopify");
 
-  const handleTabClick = (tab) => {
+  const handleTabClick = (tab: SetStateAction<string>) => {
     setActiveTab(tab);
   };
 
   return (
-    <div className="w-2/3">
-      <div className="relative right-0">
+    <div className="">
+      <div className="relative">
         <ul
-          className="relative flex flex-wrap p-1 list-none rounded-xl bg-blue-gray-50/60"
-          role="list"
+          className="relative flex flex-wrap p-1 list-none rounded-xl"
         >
           <li className="z-30 flex-auto text-center">
             <a
@@ -71,7 +70,7 @@ function Connect() {
             role="tabpanel"
           >
             <div>
-              <Home />
+              <Shopify />
             </div>
           </div>
           <div

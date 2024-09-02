@@ -4,7 +4,7 @@ import { useRegistrationMutation } from "../Redux/Features/authApiSlice";
 import { toast } from "react-toastify";
 import { successMessage } from "./types";
 
-function Home() {
+function Shopify() {
   const [apiKey, setApiKey] = useState("");
   const [apiSecretKey, setApiSecretKey] = useState("");
   const [shopUrl, setShopUrl] = useState("");
@@ -101,4 +101,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Shopify;

@@ -69,7 +69,7 @@ export interface productDetail {
   productImg: string;
   source_id: string;
   updatedAt: Date;
-  weight: Number;
+  weight: number;
   weight_unit_id: string;
   _id: string;
 }

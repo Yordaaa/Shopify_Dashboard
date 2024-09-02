@@ -107,7 +107,7 @@ const ProductListPage = () => {
           })}
         </tbody>
       </table>
-      {products?.filteredProductCount! > products?.resPerPage! && (
+      {products?.filteredProductCount! > products?.resPerPage && (
         <div className="flex overflow-x-auto  justify-center pt-5">
           <Pagination
             currentPage={currentPage}
