@@ -40,6 +40,17 @@ export const authApiSlice = apiSlice2.injectEndpoints({
         body: data,
       }),
     }),
+
+    sendToWoocommerce: builder.mutation<
+      RegistrationResponseProps,
+      { shopName: string; products: CartItem[] }
+    >({
+      query: (data) => ({
+        url: "/woocommerce/products",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -47,4 +58,5 @@ export const {
   useRegistrationMutation,
   useWoocommerceRegistrationMutation,
   useSendToShopifyMutation,
+  useSendToWoocommerceMutation,
 } = authApiSlice;

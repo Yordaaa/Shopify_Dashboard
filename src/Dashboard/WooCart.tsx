@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import { removeFromCart, clearCart } from "../Redux/Features/cartSlice";
 import { cartSelector } from "../Redux/Features/selector";
 import { FormEvent, useState } from "react";
-import { useSendToShopifyMutation } from "../Redux/Features/authApiSlice";
+import { useSendToWoocommerceMutation } from "../Redux/Features/authApiSlice";
 import { toast } from "react-toastify";
 
-export default function Cart() {
+export default function WooCart() {
   const cartItems = useSelector(cartSelector);
   const dispatch = useDispatch();
   const [shopName, setShopName] = useState("");
   const [prices, setPrices] = useState<{ [key: string]: number }>({});
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-  const [sendToShopify, { isLoading }] = useSendToShopifyMutation();
+  const [sendToWoocommerce, { isLoading }] = useSendToWoocommerceMutation();
 
   const handleRemoveItem = (id: string) => {
     dispatch(removeFromCart({ _id: id }));
@@ -40,13 +40,13 @@ export default function Cart() {
       quantity: quantities[item._id],
     }));
 
-    console.log("Sending data to Shopify:", {
+    console.log("Sending data to Woocommerce:", {
       name: shopName,
       products,
     });
 
     try {
-      const response = await sendToShopify({
+      const response = await sendToWoocommerce({
         shopUrl: shopName,
         products,
       }).unwrap();
@@ -141,7 +141,7 @@ export default function Cart() {
           disabled={isLoading}
           className="mt-5 w-full text-white bg-blue-950 hover:opacity-90 font-medium rounded-lg px-5 py-2.5 text-center"
         >
-          {isLoading ? "Sending..." : "Send to Shopify"}
+          {isLoading ? "Sending..." : "Send to Woocommerce"}
         </button>
       </form>
     </div>
