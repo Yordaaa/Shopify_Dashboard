@@ -3,14 +3,12 @@ import {
   RegistrationInputProps,
   RegistrationResponseProps,
   CartItem,
+  WooCommerceRegistrationInputProps,
 } from "./types";
 
 export const authApiSlice = apiSlice2.injectEndpoints({
   endpoints: (builder) => ({
-    registration: builder.mutation<
-      RegistrationResponseProps,
-      RegistrationInputProps
-    >({
+    registration: builder.mutation<RegistrationResponseProps, RegistrationInputProps>({
       query: (data) => ({
         url: "/shopify/create-account",
         method: "POST",
@@ -18,10 +16,15 @@ export const authApiSlice = apiSlice2.injectEndpoints({
       }),
     }),
 
-    sendToShopify: builder.mutation<
-      RegistrationResponseProps,
-      { shopUrl: string; products: CartItem[] }
-    >({
+    woocommerceRegistration: builder.mutation<RegistrationResponseProps, WooCommerceRegistrationInputProps>({
+      query: (data) => ({
+        url: "/woocommerce/create-account",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    sendToShopify: builder.mutation<RegistrationResponseProps, { shopUrl: string; products: CartItem[] }>({
       query: (data) => ({
         url: "/shopify/products",
         method: "POST",
@@ -31,5 +34,8 @@ export const authApiSlice = apiSlice2.injectEndpoints({
   }),
 });
 
-export const { useRegistrationMutation, useSendToShopifyMutation } =
-  authApiSlice;
+export const {
+  useRegistrationMutation,
+  useWoocommerceRegistrationMutation,
+  useSendToShopifyMutation,
+} = authApiSlice;

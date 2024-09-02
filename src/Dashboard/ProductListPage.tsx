@@ -46,14 +46,14 @@ const ProductListPage = () => {
     <div className="container p-5 max-w-screen-lg mx-auto">
       <h1 className="text-3xl font-bold mb-5 text-center">Product List</h1>
 
-      <div className="relative w-[30%] m-2">
+      <div className="relative m-2 my-4">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3">
           <i className="fas fa-search"></i>
         </div>
         <input
           type="search"
           onChange={onchangeSearch}
-          className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50"
+          className="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50"
           placeholder="Enter keyword"
           name="searchKeyWord"
         />
@@ -107,7 +107,7 @@ const ProductListPage = () => {
           })}
         </tbody>
       </table>
-      {products?.filteredProductCount! > products?.resPerPage! && (
+      {products?.filteredProductCount > products?.resPerPage! && (
         <div className="flex overflow-x-auto  justify-center pt-5">
           <Pagination
             currentPage={currentPage}
