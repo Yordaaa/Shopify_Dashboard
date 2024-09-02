@@ -3,6 +3,7 @@ import ProductListPage from "./Dashboard/ProductListPage";
 import Home from "./Dashboard/Home";
 import Cart from "./Dashboard/Cart";
 import WooCommerce from "./Dashboard/WooCommerce";
+import Connect from "./Dashboard/Connect";
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
         <Route path="/product" element={<ProductListPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/woocommerce" element={<WooCommerce />} />
+        <Route path="/connect" element={<Connect />} />
       </Routes>
     </>
   );
