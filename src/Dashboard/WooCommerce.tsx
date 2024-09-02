@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { ErrorResponse, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useWoocommerceRegistrationMutation } from "../Redux/Features/authApiSlice";
+import { successMessage } from "./types";
 
 function WooCommerce() {
   const [url, setUrl] = useState("");
   const [consumerKey, setConsumerKey] = useState("");
   const [consumerSecret, setConsumerSecret] = useState("");
-  const [shopName, setShopName] = useState("");
 
   const [registration, { isLoading }] = useWoocommerceRegistrationMutation();
   const navigate = useNavigate();
@@ -19,20 +19,23 @@ function WooCommerce() {
         url,
         consumerKey,
         consumerSecret,
-        shopName,
-      }).unwrap();
+      });
 
-      if (res.success) {
-        toast.success(res.message);
-        setUrl("");
-        setConsumerKey("");
-        setConsumerSecret("");
-        setShopName("");
-        navigate("/product");
+      if ("data" in res) {
+        const { data } = res as { data: successMessage };
+        if (data.success) {
+          toast.success(data.message);
+          setUrl("");
+          setConsumerKey("");
+          setConsumerSecret("");
+          navigate("/product");
+        }
+      } else {
+        const { error } = res as { error: ErrorResponse };
+        toast.error(error.data.message);
       }
-    } catch (error: any) {
-      toast.error(error?.data?.message || "An error occurred");
-      console.log("Error:", error?.data?.message || "An error occurred");
+    } catch (error) {
+      toast.error("An expexted  error occurred");
     }
   };
 
@@ -77,19 +80,6 @@ function WooCommerce() {
               placeholder="Enter Consumer Secret"
               value={consumerSecret}
               onChange={(e) => setConsumerSecret(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="shopName" className="block text-gray-700">
-              Shop Name
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 text-gray-700"
-              id="shopName"
-              type="text"
-              placeholder="Enter Shop Name"
-              value={shopName}
-              onChange={(e) => setShopName(e.target.value)}
             />
           </div>
           <div className="flex justify-end">

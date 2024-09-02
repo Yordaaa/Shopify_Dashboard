@@ -8,7 +8,10 @@ import {
 
 export const authApiSlice = apiSlice2.injectEndpoints({
   endpoints: (builder) => ({
-    registration: builder.mutation<RegistrationResponseProps, RegistrationInputProps>({
+    registration: builder.mutation<
+      RegistrationResponseProps,
+      RegistrationInputProps
+    >({
       query: (data) => ({
         url: "/shopify/create-account",
         method: "POST",
@@ -16,7 +19,10 @@ export const authApiSlice = apiSlice2.injectEndpoints({
       }),
     }),
 
-    woocommerceRegistration: builder.mutation<RegistrationResponseProps, WooCommerceRegistrationInputProps>({
+    woocommerceRegistration: builder.mutation<
+      RegistrationResponseProps,
+      WooCommerceRegistrationInputProps
+    >({
       query: (data) => ({
         url: "/woocommerce/create-account",
         method: "POST",
@@ -24,7 +30,10 @@ export const authApiSlice = apiSlice2.injectEndpoints({
       }),
     }),
 
-    sendToShopify: builder.mutation<RegistrationResponseProps, { shopUrl: string; products: CartItem[] }>({
+    sendToShopify: builder.mutation<
+      RegistrationResponseProps,
+      { shopName: string; products: CartItem[] }
+    >({
       query: (data) => ({
         url: "/shopify/products",
         method: "POST",
