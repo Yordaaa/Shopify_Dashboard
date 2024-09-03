@@ -5,13 +5,12 @@ const initialState: productResTyp[] = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart")!)
   : [];
 
-export const cartSlice = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<productResTyp>) => {
       const product = action.payload;
-      console.log(product);
       const existingItem = state.find((i) => i._id === product._id);
       if (existingItem) {
         return;

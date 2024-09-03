@@ -1,6 +1,6 @@
 import { ErrorResponse, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useRegistrationMutation } from "../Redux/Features/authApiSlice";
+import { useRegistrationMutation } from "../Redux/Features/shopsApiSlice";
 import { toast } from "react-toastify";
 import { successMessage } from "./types";
 

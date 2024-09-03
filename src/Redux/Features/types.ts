@@ -68,3 +68,21 @@ export interface RegistrationResponseProps {
   success: boolean;
   message?: string;
 }
+
+export interface userTypeProps {
+  _id: string;
+  email: string;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserInputProps {
+  email: string;
+  password: string;
+}
+
+export interface UserResponseProps {
+  success: boolean;
+  userInfo: userTypeProps;
+}

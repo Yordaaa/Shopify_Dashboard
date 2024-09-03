@@ -3,7 +3,7 @@ import { ErrorResponse, Link } from "react-router-dom";
 import { removeFromCart, clearCart } from "../Redux/Features/cartSlice";
 import { cartSelector } from "../Redux/Features/selector";
 import { FormEvent, useState } from "react";
-import { useSendToWoocommerceMutation } from "../Redux/Features/authApiSlice";
+import { useSendToWoocommerceMutation } from "../Redux/Features/shopsApiSlice";
 import { toast } from "react-toastify";
 import { successMessage } from "./types";
 

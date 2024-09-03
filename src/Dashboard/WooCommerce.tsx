@@ -1,7 +1,7 @@
 import { ErrorResponse, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useWoocommerceRegistrationMutation } from "../Redux/Features/authApiSlice";
+import { useWoocommerceRegistrationMutation } from "../Redux/Features/shopsApiSlice";
 import { successMessage } from "./types";
 
 function WooCommerce() {
