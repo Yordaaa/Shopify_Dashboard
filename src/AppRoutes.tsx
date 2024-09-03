@@ -5,6 +5,7 @@ import Connect from "./Dashboard/Connect";
 import SendProduct from "./Dashboard/SendProduct";
 import SideNav from "./Dashboard/SideNav";
 import Header from "./Dashboard/Header";
+import PrivateRoute from "./Dashboard/PrivateRoute";
 
 function AppRoutes() {
   return (
@@ -13,10 +14,12 @@ function AppRoutes() {
       <div className="w-full">
         <Header />
         <Routes>
-          <Route path="/" element={<Connect />} />
-          <Route path="/product" element={<ProductListPage />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/sendproduct" element={<SendProduct />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Connect />} />
+            <Route path="/product" element={<ProductListPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/sendproduct" element={<SendProduct />} />
+          </Route>
         </Routes>
       </div>
     </div>

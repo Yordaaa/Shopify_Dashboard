@@ -10,11 +10,11 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<UserResponseProps>) => {
-      state.userInfo = action.payload;
+      state= action.payload;
       localStorage.setItem("userInfo", JSON.stringify(state));
     },
     clearCredentials: (state) => {
-      state?.userInfo = null;
+      state = null;
       localStorage.removeItem("userInfo");
     },
   },
