@@ -3,8 +3,8 @@ import { ErrorResponse, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../Redux/Features/authApiSlice";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { successMessage } from "./types";
 import { setCredentials } from "../Redux/Features/authSlice";
+import { UserResponseProps } from "../Redux/Features/types";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ function Login() {
     try {
       const res = await login({ email, password });
       if ("data" in res) {
-        const { data } = res as { data: successMessage };
+        const { data } = res as { data: UserResponseProps };
         if (data.success) {
           toast.success("Signed in successfully");
           setEmail("");
