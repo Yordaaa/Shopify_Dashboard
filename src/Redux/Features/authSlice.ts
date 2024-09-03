@@ -15,6 +15,7 @@ const userSlice = createSlice({
     },
     clearCredentials: (state) => {
       state = null;
+      state = null;
       localStorage.removeItem("userInfo");
     },
   },
